@@ -81,7 +81,7 @@ def load_data(df,connection_string):
                     None
        """
        #Connect to the database using alchemy database engine
-      engine = create_engine(connection_sting)
+      engine = create_engine(connection_string)
       #Load the dataframe to Postgre database
       df.to_sql('network',engine , if_exists = 'append', index = False)
       print("Loading successful")
@@ -98,7 +98,7 @@ def read_data(connection_string):
                     Returns a Dataframe
        """
      #Create a connection to the database using pyscop
-      conn = psycopg2.connect(connection_sting)
+      conn = psycopg2.connect(connection_string)
       #Create the query to be executed
       query = "SELECT * FROM network"
       # Execute query,create a dataframe and display the five records.
@@ -106,9 +106,9 @@ def read_data(connection_string):
       print(queried_frame.head())
 
 if __name__ == '__main__':
-     connection_sting = 'postgresql://postgres:pipeline@35.239.51.53:5432/postgres'
+     connection_string = 'postgresql://postgres:pipeline@35.239.51.53:5432/postgres'
      merged_sensors = extract_data()
      df = transform_data(merged_sensors)
      data_analysis(df)
-     load_data(df,connection_sting)
-     read_data(connection_sting)
+     load_data(df,connection_string)
+     read_data(connection_string)
